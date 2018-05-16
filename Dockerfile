@@ -19,4 +19,4 @@ RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraf
 
 ADD ./*.sh ./
 
-CMD ./cmd.sh
+CMD bash

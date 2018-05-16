@@ -12,10 +12,7 @@ NAMESPACE=${NAMESPACE:-"kubeflow"}
 APP_NAME=${APP_NAME:-"dcos-kubeflow"}
 VERSION=${VERSION:-"v0.1.2"}
 
-if [ -z "$GITHUB_TOKEN" ]
-then
-    echo "Env variable GITHUB_TOKEN not defined" && exit 1
-fi
+[ -z "$GITHUB_TOKEN" ] || ( echo "Env variable GITHUB_TOKEN not defined" && exit 1 )
 
 kubectl create namespace ${NAMESPACE}
 
