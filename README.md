@@ -40,6 +40,13 @@ Type `make ui` (or command `dcos cluster list`) to get the public URL of the DCO
 
 As result of the default command you should have a kubeflow installation over your kubernetes service on DCOS.
 
+If you want to deploy some kubeflow examples:
+
+```sh
+./kubeflow_example.sh
+./kubeflow_seldon.sh
+```
+
 ## Removing
 
 When you finish remind clean all resources, to do that type this command inside the docker container:

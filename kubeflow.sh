@@ -2,22 +2,19 @@
 
 set -e
 
-curl -L -o ks.tar.gz $(curl -s https://api.github.com/repos/ksonnet/ksonnet/releases/latest | jq -r ".assets[] | select(.name | test(\"linux_amd64\")) | .browser_download_url")
+
+[ -z "$GITHUB_TOKEN" ] && echo "Env variable GITHUB_TOKEN not defined" && exit 1
+
+curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o ks.tar.gz $(curl -H "Authorization: token ${GITHUB_TOKEN}" -s https://api.github.com/repos/ksonnet/ksonnet/releases/latest | jq -r ".assets[] | select(.name | test(\"linux_amd64\")) | .browser_download_url")
 tar -zxvf ks.tar.gz --strip-components=1 && mv ./ks /usr/local/bin/
 
 dcos kubernetes kubeconfig
 
-# Default values
-NAMESPACE=${NAMESPACE:-"kubeflow"}
-APP_NAME=${APP_NAME:-"dcos-kubeflow"}
-VERSION=${VERSION:-"v0.1.2"}
-
-[ -z "$GITHUB_TOKEN" ] || ( echo "Env variable GITHUB_TOKEN not defined" && exit 1 )
 
 kubectl create namespace ${NAMESPACE}
 
-# Initialize a ksonnet app. Set the namespace for it's default environment.
-APP_NAME=dcos-kubeflow
+# Initialize a ksonnet app. Set the namespace for default environment.
+cd $DCOS_HOME
 ks init ${APP_NAME}
 cd ${APP_NAME}
 ks env set default --namespace ${NAMESPACE}

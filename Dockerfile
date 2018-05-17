@@ -6,13 +6,14 @@ ENV VERSION="v0.1.2"
 ENV GIT_VERSION="master"
 ENV TERRAFORM_VERSION="0.11.7"
 ENV GITHUB_TOKEN=""
+ENV DCOS_HOME="/dcos-kubernetes-quickstart"
 
 RUN apt-get update \
     && apt-get install -y gcc make curl jq unzip git
 
-RUN git clone -b $GIT_VERSION https://github.com/mesosphere/dcos-kubernetes-quickstart.git
+RUN git clone -b $GIT_VERSION https://github.com/mesosphere/dcos-kubernetes-quickstart.git $DCOS_HOME
 
-WORKDIR /dcos-kubernetes-quickstart
+WORKDIR $DCOS_HOME
 
 RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o tarraform.zip \
  && unzip tarraform.zip && chmod +x terraform && mv terraform /usr/local/bin/
