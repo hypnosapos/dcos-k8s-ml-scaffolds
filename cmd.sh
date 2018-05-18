@@ -27,5 +27,3 @@ while [[ $COUNT_DOWN -lt 100 ]]; do
   sleep 4
 done
 
-echo "Installing kubeflow ..."
-./kubeflow.sh

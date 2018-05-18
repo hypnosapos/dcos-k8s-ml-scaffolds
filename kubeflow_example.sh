@@ -2,6 +2,8 @@
 
 set -e
 
+[ -z "KUBEFLOW_INSTALLED" ] && ./kubeflow.sh
+
 cd ${DCOS_HOME}/${APP_NAME}
 
 MODEL_COMPONENT=serveInception

@@ -37,3 +37,5 @@ ks param set kubeflow-core reportUsage false
 
 # Deploy Kubeflow
 ks apply default -c kubeflow-core
+
+export KUBEFLOW_INSTALLED=true

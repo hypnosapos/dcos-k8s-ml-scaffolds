@@ -29,7 +29,7 @@ docker run -it \
    -v $(pwd)/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
    -v $(pwd)/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
    -v $(pwd)/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
-   hypnosapos/dcos-k8s-kubeflow bash
+   hypnosapos/dcos-k8s-kubeflow
 
 # ./cmd.sh
 ```
@@ -40,12 +40,22 @@ Type `make ui` (or command `dcos cluster list`) to get the public URL of the DCO
 
 As result of the default command you should have a kubeflow installation over your kubernetes service on DCOS.
 
-If you want to deploy some kubeflow examples:
+If you want to deploy some ML tools like kubeflow or seldon and examples:
 
 ```sh
+# ML tools
+./kubeflow.sh
+./seldon.sh
+
+# Kubeflow Examples
 ./kubeflow_example.sh
 ./kubeflow_seldon.sh
+
+# Seldon Examples
+./seldon_example.sh
 ```
+
+
 
 ## Removing
 
