@@ -13,17 +13,18 @@ printf 'yes' | make gcp deploy
 
 COUNT_DOWN=0
 while [[ $COUNT_DOWN -lt 100 ]]; do
-  k8s_status=$(dcos service --completed | grep kubernetes | awk '{print $2}')
-  if [[ 'True' == $k8s_status ]]; then
+  k8s_status=$(dcos kubernetes plan status deploy | grep -m1 COMPLETE | wc -l)
+  if [[ '1' == $k8s_status ]]; then
     echo -e "\033[32mKubernetes service is ready ;-)\033[0m"
     break;
   fi
   if [[ $COUNT_DOWN -eq 100 ]]; then
-    echo -e "\033[31mKubernetes service is not OK yet, :-(\033[0m"
+    echo -e "\033[31mKubernetes service is not yet, :-(\033[0m"
     exit 1
   fi
   echo "Waiting for kubernetes service ... [Attempt ${COUNT_DOWN}/100]"
   COUNT_DOWN=`expr $COUNT_DOWN + 1`
-  sleep 4
+  sleep 5
 done
+
 

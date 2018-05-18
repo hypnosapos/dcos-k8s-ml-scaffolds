@@ -1,6 +1,6 @@
 # Kubeflow over kubernetes service on DC/OS (flying on GCP)
 
-This project is almost a fake, just collect command lines to run kubeflow on kubernetes service of DC/OS cluster in GCP (no checked for other cloud providers),
+This project is almost a fake, just collect command lines to run kubeflow or seldon on kubernetes service of DC/OS cluster in GCP (no checked for other cloud providers),
 based on https://github.com/mesosphere/dcos-kubernetes-quickstart.
 
 ## HowTo
@@ -23,15 +23,15 @@ gcp_credentials_key_file = "/dcos-kubernetes-quickstart/gcp.json"
 After that, run the container adding these volumes to the container:
 
 ```sh
-docker run -it \
+docker run -it --name dcos-k8s \
    -e GITHUB_TOKEN=*********** \
    -v $(pwd)/dcos-kubernetes-quickstart/resources:/dcos-kubernetes-quickstart/resources \
-   -v $(pwd)/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
-   -v $(pwd)/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
-   -v $(pwd)/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
-   hypnosapos/dcos-k8s-kubeflow
+   -v path/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
+   -v path/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
+   -v path/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
+   hypnosapos/dcos-k8s-ml-scaffolds
 
-# ./cmd.sh
+# ./dcos-kubernetes.sh
 ```
 
 While DC/OS is installing in the shell will appear an URL to get a valid token via OAuth, select one and copy/paste the value.
@@ -69,5 +69,13 @@ or:
 
 ```sh
 cd .deploy
-terraform destroy  -lock=false -var-file desired_cluster_profile
+terraform destroy -lock=false -var-file desired_cluster_profile
+```
+
+And finally, remove the container and its image:
+
+```sh
+docker rm -f dcos-k8s
+# docker rm $(docker ps -a -f "ancestor=hypnosapos/dcos-k8s-ml-scaffolds" --format '{{.Names}}')
+docker rmi -f hypnosapos/dcos-k8s-ml-scaffolds
 ```
