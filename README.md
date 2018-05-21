@@ -43,19 +43,15 @@ As result of the default command you should have a kubeflow installation over yo
 If you want to deploy some ML tools like kubeflow or seldon and examples:
 
 ```sh
-# ML tools
+# Kubeflow
 ./kubeflow.sh
-./seldon.sh
-
-# Kubeflow Examples
 ./kubeflow_example.sh
 ./kubeflow_seldon.sh
 
-# Seldon Examples
+# Seldon
+./seldon.sh
 ./seldon_example.sh
 ```
-
-
 
 ## Removing
 

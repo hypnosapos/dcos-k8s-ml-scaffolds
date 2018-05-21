@@ -9,11 +9,11 @@ eval $(ssh-agent) && ssh-add dcos_gcp
 
 make get-cli && mv dcos kubectl /usr/local/bin/
 
-printf 'yes' | make gcp deploy
+make gcp deploy
 
 COUNT_DOWN=0
 while [[ $COUNT_DOWN -lt 100 ]]; do
-  k8s_status=$(dcos kubernetes plan status deploy | grep -m1 COMPLETE | wc -l)
+  k8s_status=$(dcos kubernetes plan status deploy | head -n 1 | grep COMPLETE | wc -l)
   if [[ '1' == $k8s_status ]]; then
     echo -e "\033[32mKubernetes service is ready ;-)\033[0m"
     break;
@@ -22,9 +22,11 @@ while [[ $COUNT_DOWN -lt 100 ]]; do
     echo -e "\033[31mKubernetes service is not yet, :-(\033[0m"
     exit 1
   fi
-  echo "Waiting for kubernetes service ... [Attempt ${COUNT_DOWN}/100]"
+  echo "Waiting for kubernetes service [${COUNT_DOWN}/100] ..."
   COUNT_DOWN=`expr $COUNT_DOWN + 1`
   sleep 5
 done
 
+
+echo "Setting up kubernetes client ..." && dcos kubernetes kubeconfig
 

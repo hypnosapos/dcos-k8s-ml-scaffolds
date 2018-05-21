@@ -8,9 +8,6 @@ set -e
 curl -L -H "Authorization: token ${GITHUB_TOKEN}" -o ks.tar.gz $(curl -H "Authorization: token ${GITHUB_TOKEN}" -s https://api.github.com/repos/ksonnet/ksonnet/releases/latest | jq -r ".assets[] | select(.name | test(\"linux_amd64\")) | .browser_download_url")
 tar -zxvf ks.tar.gz --strip-components=1 && mv ./ks /usr/local/bin/
 
-dcos kubernetes kubeconfig
-
-
 kubectl create namespace ${NAMESPACE}
 
 # Initialize a ksonnet app. Set the namespace for default environment.
@@ -37,5 +34,8 @@ ks param set kubeflow-core reportUsage false
 
 # Deploy Kubeflow
 ks apply default -c kubeflow-core
+
+# Adding Gcloud credentials as secret
+kubectl create secret generic gcloud-creds --from-file=gcp.json=/dcos-kubernetes-quickstart/gcp.json -n kubeflow
 
 export KUBEFLOW_INSTALLED=true

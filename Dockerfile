@@ -15,9 +15,10 @@ RUN git clone -b $GIT_VERSION https://github.com/mesosphere/dcos-kubernetes-quic
 
 WORKDIR $DCOS_HOME
 
-RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o tarraform.zip \
- && unzip tarraform.zip && chmod +x terraform && mv terraform /usr/local/bin/
+RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -o terraform.zip \
+ && unzip terraform.zip && chmod +x terraform && mv terraform /usr/local/bin/
 
 ADD ./*.sh ./
+ADD ./*.yaml ./
 
 CMD bash

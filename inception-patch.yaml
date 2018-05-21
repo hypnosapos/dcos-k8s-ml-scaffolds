@@ -1,0 +1,17 @@
+spec:
+  template:
+    spec:
+      containers:
+      - name: "inception"
+        image: "gcr.io/kubeflow-images-public/tf-model-server-cpu:v20180327-995786ec"
+        env:
+        - name: GOOGLE_APPLICATION_CREDENTIALS
+          value: "/tmp/gcp/gcp.json"
+        volumeMounts:
+        - name: gcloud-creds
+          mountPath: /tmp/gcp
+          readOnly: true
+      volumes:
+      - name: gcloud-creds
+        secret:
+          secretName: gcloud-creds
