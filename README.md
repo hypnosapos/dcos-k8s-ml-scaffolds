@@ -5,7 +5,7 @@ based on https://github.com/mesosphere/dcos-kubernetes-quickstart.
 
 ## HowTo
 
-Clone the require project:
+Clone the required project:
 
 ```sh
 $ git clone https://github.com/mesosphere/dcos-kubernetes-quickstart
@@ -20,7 +20,7 @@ gcp_ssh_pub_key_file = "/dcos-kubernetes-quickstart/dcos_gcp.pub"
 gcp_credentials_key_file = "/dcos-kubernetes-quickstart/gcp.json"
 ```
 
-After that, run the container adding these volumes to the container:
+After that, run the container adding these volumes:
 
 ```sh
 docker run -it --name dcos-k8s \
@@ -34,11 +34,10 @@ docker run -it --name dcos-k8s \
 # ./dcos-kubernetes.sh
 ```
 
-While DC/OS is installing in the shell will appear an URL to get a valid token via OAuth, select one and copy/paste the value.
+While DC/OS is installing in the shell will appear an URL to get a valid token via OAuth, select one method and copy/paste the value.
+As result of the script you should have a kubernetes service on DCOS ready for action.
 
 Type `make ui` (or command `dcos cluster list`) to get the public URL of the DCOS web console and `make kube-ui` for the kubernetes dashboard URL.
-
-As result of the default command you should have a kubeflow installation over your kubernetes service on DCOS.
 
 If you want to deploy some ML tools like kubeflow or seldon and examples:
 
