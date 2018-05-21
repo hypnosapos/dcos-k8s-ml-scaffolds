@@ -46,7 +46,9 @@ If you want to deploy some ML tools like kubeflow or seldon and examples:
 # Kubeflow
 ./kubeflow.sh
 ./kubeflow_example.sh
-./kubeflow_seldon.sh
+./kubeflow_example_client.sh
+
+#./kubeflow_seldon.sh
 
 # Seldon
 ./seldon.sh
