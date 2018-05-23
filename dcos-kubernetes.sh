@@ -15,7 +15,8 @@ COUNT_DOWN=0
 while [[ $COUNT_DOWN -lt 100 ]]; do
   k8s_status=$(dcos kubernetes plan status deploy | head -n 1 | grep COMPLETE | wc -l)
   if [[ '1' == $k8s_status ]]; then
-    echo -e "\033[32mKubernetes service is ready ;-)\033[0m"
+    dcos kubernetes kubeconfig
+    echo -e "\033[32mKubernetes service is ready for use, ;-)\033[0m"
     break;
   fi
   if [[ $COUNT_DOWN -eq 100 ]]; then
@@ -26,7 +27,3 @@ while [[ $COUNT_DOWN -lt 100 ]]; do
   COUNT_DOWN=`expr $COUNT_DOWN + 1`
   sleep 5
 done
-
-
-echo "Setting up kubernetes client ..." && dcos kubernetes kubeconfig
-

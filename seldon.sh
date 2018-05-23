@@ -4,9 +4,11 @@ set -e
 
 [ -z "$GITHUB_TOKEN" ] && echo "Env variable GITHUB_TOKEN not defined" && exit 1
 
-TAG_NAME=$(curl -H "Authorization: token ${GITHUB_TOKEN}" -s https://api.github.com/repos/kubernetes/helm/releases/latest | jq -r ".tag_name")
-curl -L -H "Authorization: token ${GITHUB_TOKEN}" https://storage.googleapis.com/kubernetes-helm/helm-${TAG_NAME}-linux-amd64.tar.gz -o helm.tar.gz
-tar -xzvf helm.tar.gz --wildcards --no-anchored 'helm' --strip-components=1 && mv ./helm /usr/local/bin/
+HELM_URL=https://storage.googleapis.com/kubernetes-helm/helm-$(curl -H "Cache-Control: no-cache" -H "Authorization: token ${GITHUB_TOKEN}" -s https://api.github.com/repos/kubernetes/helm/releases/latest | jq -r ".tag_name")-linux-amd64.tar.gz
+curl -L -H "Authorization: token ${GITHUB_TOKEN}" $HELM_URL -o helm.tar.gz
+
+tar -xzvf helm.tar.gz --wildcards --no-anchored 'helm' --strip-components=1
+mv ./helm /usr/local/bin/
 
 kubectl -n kube-system create sa tiller
 kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
