@@ -54,6 +54,12 @@ If you want to deploy some ML tools like kubeflow or seldon and examples:
 ./seldon_example.sh
 ```
 
+Also we can try out an Eclipse Che installation:
+
+```sh
+./eclipse_che.sh
+```
+
 ## Removing
 
 When you finish remind clean all resources, to do that type this command inside the docker container:

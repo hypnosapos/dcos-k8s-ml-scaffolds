@@ -2,9 +2,9 @@
 
 set -e
 
-[ -z "$GITHUB_TOKEN" ] && echo "Env variable GITHUB_TOKEN not defined" && exit 1
-
 cd ${DCOS_HOME}
+
+[ -z "$HELM_INSTALLED" ] && echo "Helm and tiller must be installed ..." && ./helm.sh
 
 HELM_URL=https://storage.googleapis.com/kubernetes-helm/helm-$(curl -H "Cache-Control: no-cache" -H "Authorization: token ${GITHUB_TOKEN}" -s https://api.github.com/repos/kubernetes/helm/releases/latest | jq -r ".tag_name")-linux-amd64.tar.gz
 curl -L $HELM_URL -o helm.tar.gz
