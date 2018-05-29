@@ -3,8 +3,9 @@ jobs:
   "docker-release":
     docker:
     - image: docker
-    working_directory: ~/repo
     steps:
+    - setup_remote_docker:
+        docker_layer_caching: true
     - checkout
     - run:
         name: build and publish docker image
