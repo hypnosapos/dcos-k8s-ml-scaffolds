@@ -17,6 +17,7 @@ while [[ $COUNT_DOWN -lt 100 ]]; do
   if [[ '1' == $k8s_status ]]; then
     dcos kubernetes kubeconfig
     echo -e "\033[32mKubernetes service is ready for use, ;-)\033[0m"
+    kubectl cluster-info
     break;
   fi
   if [[ $COUNT_DOWN -eq 100 ]]; then

@@ -6,4 +6,5 @@ set -e
 
 helm install cartpole-rl-remote --name cartpole \
      --repo https://storage.googleapis.com/hypnosapos-charts \
-     --set model_type=model
+     --set model_type=model \
+     --namespace seldon

@@ -36,6 +36,6 @@ ks param set kubeflow-core reportUsage false
 ks apply default -c kubeflow-core
 
 # Adding Gcloud credentials as secret
-kubectl create secret generic gcloud-creds --from-file=gcp.json=/dcos-kubernetes-quickstart/gcp.json -n kubeflow
+kubectl create secret generic gcloud-creds --from-file=gcp.json=/dcos-kubernetes-quickstart/gcp.json -n ${NAMESPACE}
 
 export KUBEFLOW_INSTALLED=true
