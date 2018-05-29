@@ -1,4 +1,8 @@
 # Kubeflow over kubernetes service on DC/OS (flying on GCP)
+[![Build status](https://circleci.com/gh/hypnosapos/dcos-k8s-ml-scaffolds/tree/master.svg?style=svg)](https://circleci.com/gh/hypnosapos/dcos-k8s-ml-scaffolds/tree/master)
+[![Layers](https://images.microbadger.com/badges/image/hypnosapos/dcos-k8s-ml-scaffolds.svg)](https://microbadger.com/images/hypnosapos/dcos-k8s-ml-scaffolds)
+[![Version](https://images.microbadger.com/badges/version/hypnosapos/dcos-k8s-ml-scaffolds.svg)](https://microbadger.com/images/hypnosapos/dcos-k8s-ml-scaffolds)
+
 
 This project is almost a fake, just collect command lines to run kubeflow or seldon on kubernetes service of DC/OS cluster in GCP (no checked for other cloud providers),
 based on https://github.com/mesosphere/dcos-kubernetes-quickstart.
