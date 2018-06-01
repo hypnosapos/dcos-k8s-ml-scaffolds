@@ -33,6 +33,7 @@ docker run -it --name dcos-k8s \
    -v path/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
    -v path/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
    -v path/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
+   -v path/desired_cluster_profile.gcp:/dcos-kubernetes-quickstart/resources/desired_cluster_profile.gcp \
    hypnosapos/dcos-k8s-ml-scaffolds
 
 # ./dcos-kubernetes.sh
