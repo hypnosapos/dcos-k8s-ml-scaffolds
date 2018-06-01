@@ -21,6 +21,6 @@ RUN curl -L https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraf
 ADD ./*.sh ./
 ADD ./*.yaml ./
 
-COPY ./resources/*.gcp ./resources/
+ADD ./resources/*.gcp ./resources/
 
 CMD bash
