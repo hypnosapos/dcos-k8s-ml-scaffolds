@@ -6,7 +6,7 @@
     "reserved_resources": {
       "kube_cpus": 7,
       "kube_mem": 16384,
-      "kube_disk": 40960,
+      "kube_disk": 40960
     }
   }
 }
