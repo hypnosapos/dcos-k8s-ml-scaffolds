@@ -9,7 +9,7 @@ eval $(ssh-agent) && ssh-add dcos_gcp
 
 make get-cli && mv dcos kubectl /usr/local/bin/
 
-make gcp deploy
+TERRAFORM_INSTALLER_URL=github.com/hypnosapos/terraform-dcos make gcp deploy
 
 COUNT_DOWN=0
 while [[ $COUNT_DOWN -lt 100 ]]; do
