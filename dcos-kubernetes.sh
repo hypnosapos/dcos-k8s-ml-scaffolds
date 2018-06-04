@@ -26,5 +26,5 @@ while [[ $COUNT_DOWN -lt 100 ]]; do
   fi
   echo "Waiting for kubernetes service [${COUNT_DOWN}/100] ..."
   COUNT_DOWN=`expr $COUNT_DOWN + 1`
-  sleep 5
+  sleep 10
 done
