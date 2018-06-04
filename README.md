@@ -24,6 +24,10 @@ gcp_ssh_pub_key_file = "/dcos-kubernetes-quickstart/dcos_gcp.pub"
 gcp_credentials_key_file = "/dcos-kubernetes-quickstart/gcp.json"
 ```
 
+Don't forget to update your gcp_project, etc.
+
+You can update options.json.gcp with your deployment preferences.
+
 After that, run the container adding these volumes:
 
 ```sh
@@ -32,7 +36,8 @@ docker run -it --name dcos-k8s \
    -v path/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
    -v path/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
    -v path/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
-   -v path/desired_cluster_profile.gcp:/dcos-kubernetes-quickstart/resources/desired_cluster_profile.gcp \
+   -v $(pwd)/resources/desired_cluster_profile.gcp:/dcos-kubernetes-quickstart/resources/desired_cluster_profile.gcp \
+   -v $(pwd)/resources/options.json.gcp:/dcos-kubernetes-quickstart/resources/options.json.gcp \
    hypnosapos/dcos-k8s-ml-scaffolds
 
 # ./dcos-kubernetes.sh
