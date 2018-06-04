@@ -29,7 +29,6 @@ After that, run the container adding these volumes:
 ```sh
 docker run -it --name dcos-k8s \
    -e GITHUB_TOKEN=*********** \
-   -v $(pwd)/dcos-kubernetes-quickstart/resources:/dcos-kubernetes-quickstart/resources \
    -v path/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
    -v path/your-private-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp \
    -v path/your-public-ssh-key:/dcos-kubernetes-quickstart/dcos_gcp.pub \
