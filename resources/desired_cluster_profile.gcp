@@ -3,7 +3,7 @@ num_of_masters = "1"
 num_of_private_agents = "3"
 num_of_public_agents = "1"
 #
-gcp_project = "myproject"
+gcp_project = "bbva-ialabs-poc"
 gcp_region = "europe-west1"
 gcp_zone = "b"
 
@@ -26,3 +26,5 @@ admin_cidr = "0.0.0.0/0"
 
 # Uncomment the line below if you want short living cheap cluster for testing
 #gcp_scheduling_preemptible = "true"
+
+dcos_dns_search = "google.internal"
