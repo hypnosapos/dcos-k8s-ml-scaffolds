@@ -9,7 +9,7 @@ eval $(ssh-agent) && ssh-add dcos_gcp
 
 make get-cli && mv dcos kubectl /usr/local/bin/
 
-sed -i .bak "s|github.com/dcos/terraform-dcos|github.com/hypnosapos/terraform-dcos|g" ./Makefile
+sed -i -e "s|github.com/dcos/terraform-dcos|github.com/hypnosapos/terraform-dcos|g" ./Makefile
 make gcp deploy
 
 COUNT_DOWN=0
