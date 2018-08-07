@@ -2,7 +2,7 @@ FROM debian:stretch-slim
 
 ENV NAMESPACE=kubeflow
 ENV APP_NAME="dcos-kubeflow"
-ENV VERSION="v0.1.2"
+ENV VERSION="v0.2.2"
 ENV GIT_VERSION="master"
 ENV TERRAFORM_VERSION="0.11.7"
 ENV GITHUB_TOKEN=""
