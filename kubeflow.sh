@@ -2,6 +2,7 @@
 
 set -e
 
+KUBEFLOW_VERSION=${KUBEFLOW_VERSION:-"0.2.2"}
 
 [ -z "$GITHUB_TOKEN" ] && echo "Env variable GITHUB_TOKEN not defined" && exit 1
 
@@ -17,11 +18,11 @@ cd ${APP_NAME}
 ks env set default --namespace ${NAMESPACE}
 
 # Install Kubeflow components
-ks registry add kubeflow github.com/kubeflow/kubeflow/tree/${VERSION}/kubeflow
+ks registry add kubeflow github.com/kubeflow/kubeflow/tree/${KUBEFLOW_VERSION}/kubeflow
 
-ks pkg install kubeflow/core@${VERSION}
-ks pkg install kubeflow/tf-serving@${VERSION}
-ks pkg install kubeflow/tf-job@${VERSION}
+ks pkg install kubeflow/core@${KUBEFLOW_VERSION}
+ks pkg install kubeflow/tf-serving@${KUBEFLOW_VERSION}
+ks pkg install kubeflow/tf-job@${KUBEFLOW_VERSION}
 
 # Create templates for core components
 ks generate kubeflow-core kubeflow-core
