@@ -4,22 +4,23 @@
 [![Version](https://images.microbadger.com/badges/version/hypnosapos/dcos-k8s-ml-scaffolds.svg)](https://microbadger.com/images/hypnosapos/dcos-k8s-ml-scaffolds)
 
 
-This project is almost a fake, just collect command lines to run kubeflow or seldon on kubernetes service of DC/OS cluster in GCP (no checked for other cloud providers),
+This project is almost a fake, just collect command lines to run kubeflow or seldon on a kubernetes service of DC/OS cluster in GCP (no checked for other cloud providers),
 based on https://github.com/mesosphere/dcos-kubernetes-quickstart.
 
 ## HowTo
 
 Clone the required project:
 
-```sh
-$ git clone https://github.com/mesosphere/dcos-kubernetes-quickstart
+```bash
+$ curl git clone https://github.com/mesosphere/dcos-kubernetes-quickstart
+$ curl 
 ```
 
 Read the docs (README.md) of the project and adjust values of configuration resources into the directory `resources`.
 
 Keep these values on resource `desired_cluster_profile.gcp`:
 
-```
+```bash
 gcp_ssh_pub_key_file = "/dcos-kubernetes-quickstart/dcos_gcp.pub"
 gcp_credentials_key_file = "/dcos-kubernetes-quickstart/gcp.json"
 ```
@@ -28,9 +29,15 @@ Don't forget to update your gcp_project, etc.
 
 You can update options.json.gcp with your deployment preferences.
 
+Build an internal docker image to launch DCOS:
+
+```bash
+docker build -t hypnosapos/dcos-k8s-ml-scaffolds .
+```
+
 After that, run the container adding these volumes:
 
-```sh
+```bash
 docker run -it --name dcos-k8s \
    -e GITHUB_TOKEN=*********** \
    -v path/your-credentials-gcp.json:/dcos-kubernetes-quickstart/gcp.json \
@@ -50,7 +57,7 @@ Type `make ui` (or command `dcos cluster list`) to get the public URL of the DCO
 
 If you want to deploy some ML tools like kubeflow or seldon and examples:
 
-```sh
+```bash
 # Kubeflow
 ./kubeflow.sh
 ./kubeflow_example.sh
@@ -65,7 +72,7 @@ If you want to deploy some ML tools like kubeflow or seldon and examples:
 
 Also we can try out an Eclipse Che installation:
 
-```sh
+```bash
 ./eclipse_che.sh
 ```
 
@@ -73,20 +80,20 @@ Also we can try out an Eclipse Che installation:
 
 When you finish remind clean all resources, to do that type this command inside the docker container:
 
-```sh
+```bash
 make destroy
 ```
 
 or:
 
-```sh
+```bash
 cd .deploy
 terraform destroy -lock=false -var-file desired_cluster_profile
 ```
 
 And finally, remove the container and its image:
 
-```sh
+```bash
 docker rm -f dcos-k8s
 # docker rm $(docker ps -a -f "ancestor=hypnosapos/dcos-k8s-ml-scaffolds" --format '{{.Names}}')
 docker rmi -f hypnosapos/dcos-k8s-ml-scaffolds
